@@ -8,7 +8,7 @@ namespace OnlinePaymentSystem.Entities
         public int Number { get; private set; }
         public  DateTime Date { get; private set; }
         public double TotalValue { get; private set; }
-        public List<Installment> Installments { get; set; }
+        public List<Installment> Installments { get; set; } = new List<Installment>();
 
         public Contract()
         {

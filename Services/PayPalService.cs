@@ -9,14 +9,18 @@ namespace OnlinePaymentSystem.Services
 
         public void GenerateQuotas(ProcessingContractService pcs)
         {
-            double total = 0.0;
-            double total2 = 0.0;
-            double quotas = pcs.MyContract.TotalValue / 3;
+            
+            double quota = pcs.MyContract.TotalValue / 3;
             for (int i = 1; i<= pcs.Months; i++) 
             {
-                total += quotas * (Interest * i);
-                total2 += total * Fee;
-                pcs.MyContract.Installments.Add(new Installment(pcs.MyContract.Date.AddMonths(i), pcs.MyContract.TotalValue));
+                double total2 = 0.0;
+                double total = 0.0;
+                total = quota + (quota * (Interest * i));
+                total2 += total + (total * Fee);
+
+                Installment installment = new Installment(pcs.MyContract.Date.AddMonths(i), total2);
+
+                pcs.MyContract.Installments.Add(installment);
             }
         }
     }
