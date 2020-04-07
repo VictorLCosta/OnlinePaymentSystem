@@ -1,5 +1,6 @@
 ﻿using System;
 using OnlinePaymentSystem.Entities;
+using OnlinePaymentSystem.Entities.Exceptions;
 
 namespace OnlinePaymentSystem.Services
 {
@@ -14,6 +15,10 @@ namespace OnlinePaymentSystem.Services
 
         public ProcessingContractService(Contract myContract, int months)
         {
+            if (months == 0) 
+            {
+                throw new DomainException("The contract must be paid in installments");
+            }
             MyContract = myContract;
             Months = months;
         }
